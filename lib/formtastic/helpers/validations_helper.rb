@@ -30,17 +30,16 @@ module Formtastic
             end
 
             # This ensures proper and default range,
-            # even if programmer has not entered any details for the macro
+            # even if programmer has not entered any details for the macro.
             range_start ||= 0
-            range_end ||= 100
+            range_end   ||= 100
 
             # When using macro `:validates_numericality_of`, you can
             # use `:step` option to pre-define step for numeric fields.
             # However, this is non-standard option for ActiveModel.
             options[:step] = (reflection.options[:step] || 1)
 
-            # Taken in parenthesis for Floats to work.
-            options[:in] = ((range_start)..(range_end))
+            options[:in] = Range.new(range_start, range_end)
           end
         end
 
