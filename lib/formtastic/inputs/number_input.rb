@@ -28,9 +28,9 @@ module Formtastic
     # @example Default HTML5 min/max/step attributes are detected from the numericality validations
     #
     #   class Person < ActiveRecord::Base
-    #     validates_numericality_of :age, 
-    #       :less_than => 100, 
-    #       :greater_than => 17, 
+    #     validates_numericality_of :age,
+    #       :less_than => 100,
+    #       :greater_than => 17,
     #       :only_integer => true
     #   end
     #
@@ -48,25 +48,26 @@ module Formtastic
     # @see http://api.rubyonrails.org/classes/ActiveModel/Validations/HelperMethods.html#method-i-validates_numericality_of Rails' Numericality validation documentation
     #
     # @todo Rename/Alias to NumberInput
-    class NumberInput 
+    class NumberInput
       include Base
       include Base::Stringish
-      
+
       def to_html
         input_wrapping do
           label_html <<
           builder.number_field(method, input_html_options)
         end
       end
-      
+
       def input_html_options
         {
           :min => validation_min,
           :max => validation_max,
-          :step => validation_integer_only? ? 1 : nil 
+          :step => validation_step
         }.merge(super)
       end
-      
+
     end
   end
 end
+
